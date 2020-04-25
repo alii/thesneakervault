@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import theme from '../assets/theme';
+import { withRouter } from 'react-router-dom';
 
 const SearchContainer = styled.div`
   position: relative;
@@ -14,6 +15,11 @@ const StyledResults = styled.div`
   background: white;
   padding: 20px;
   border-radius: 10px;
+
+  max-height: 70vh;
+  overflow: scroll;
+  border: 1px solid ${theme.muted};
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 `;
 
 const Input = styled.input`
@@ -27,6 +33,22 @@ const Input = styled.input`
     border: 1px solid ${theme.gray};
   }
 `;
+
+const StyledSearchResult = styled.div`
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid ${theme.muted};
+  }
+`;
+
+const SearchResult = withRouter(props => {
+  const { post } = props;
+  return <StyledSearchResult onClick={() => props.history.push(`/post/${post.id}`)}>{post.title}</StyledSearchResult>;
+});
 
 const Search = ({ posts }) => {
   const [results, setResults] = useState([]);
@@ -51,7 +73,7 @@ const Search = ({ posts }) => {
       {results.length > 0 ? (
         <StyledResults>
           {results.map(post => {
-            return <p key={post.id}>{post.title}</p>;
+            return <SearchResult key={post.id} post={post} />;
           })}
         </StyledResults>
       ) : (
@@ -61,4 +83,4 @@ const Search = ({ posts }) => {
   );
 };
 
-export default Search;
+export default withRouter(Search);

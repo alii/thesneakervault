@@ -32,8 +32,8 @@ const StyledBack = styled.button`
   letter-spacing: 1.2px;
 `;
 
-const Back = ({ history }) => {
-  return <StyledBack onClick={() => history.push('/')}>Back</StyledBack>;
+const Home = ({ history }) => {
+  return <StyledBack onClick={() => history.push('/')}>Home</StyledBack>;
 };
 
 const HeaderImage = styled.img`
@@ -59,7 +59,7 @@ const Post = props => {
   return (
     <StyledPost>
       <HeaderImage src={post.image} alt={post.title} />
-      <Back history={props.history} />
+      <Home history={props.history} />
       <h1>{post.title}</h1>
       <Markdown source={post.content} escapeHtml={false} />
     </StyledPost>
