@@ -5,6 +5,7 @@ export default styled.div`
   padding: 20px 60px;
   position: sticky;
   top: 0;
+  z-index: 99;
 
   display: flex;
   align-items: center;
