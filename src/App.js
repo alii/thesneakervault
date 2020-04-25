@@ -13,9 +13,10 @@ import styled from 'styled-components';
 import { Route, BrowserRouter, withRouter } from 'react-router-dom';
 import theme from './assets/theme';
 import Search from './components/Search';
+import FadeIn from 'react-fade-in';
 
 const AllPosts = styled.h2`
-  margin: 15px 0;
+  margin: 20px;
 `;
 
 const Home = () => {
@@ -30,9 +31,11 @@ const Home = () => {
       />
       <AllPosts>All Posts</AllPosts>
       <PostContainer>
-        {posts.map(post => {
-          return <Post key={post.id} post={post} />;
-        })}
+        <FadeIn className={'fade-in-row'} childClassName={'fade-in-child'}>
+          {posts.map(post => {
+            return <Post key={post.id} post={post} />;
+          })}
+        </FadeIn>
       </PostContainer>
     </>
   );

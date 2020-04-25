@@ -3,34 +3,48 @@ import styled from 'styled-components';
 import theme from '../assets/theme';
 import { withRouter } from 'react-router-dom';
 
+export const PostContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  .fade-in-row {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+
+    .fade-in-child {
+      flex: 1;
+      min-width: 300px;
+    }
+  }
+`;
+
 const StyledPost = styled.div`
+  margin: 5px;
   padding: 15px;
-  flex: 1;
+
   display: flex;
   flex-direction: column;
 
-  flex-basis: 150px;
-  max-width: 300px;
-  border: 1px solid ${theme.muted};
-
   cursor: pointer;
   position: relative;
-  transition: all 0.8s;
+  transition: all 0.4s;
+
   border-radius: 10px;
+  border: 1px solid transparent;
 
   img {
     border-radius: 5px;
 
+    height: 150px;
     width: 100%;
-    height: 100%;
 
     max-height: 140px;
     object-fit: cover;
   }
 
   &:hover {
-    border: 1px solid transparent;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    border: 1px solid ${theme.muted};
   }
 
   .tags {
@@ -79,10 +93,6 @@ const StyledPost = styled.div`
   }
 `;
 
-export const PostContainer = styled.div`
-  display: flex;
-`;
-
 const truncator = num => str => {
   if (str.length <= num) {
     return str;
@@ -121,4 +131,4 @@ const Post = props => {
   );
 };
 
-export default withRouter(Post);
+export default React.memo(withRouter(Post));

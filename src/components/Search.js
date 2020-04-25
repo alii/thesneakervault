@@ -20,6 +20,7 @@ const Input = styled.input`
   border-radius: 3em;
   padding: 5px 20px;
   border: 1px solid ${theme.muted};
+  background: ${theme.alpha.background(0.8)};
   outline: none;
 
   &:hover {
@@ -28,7 +29,6 @@ const Input = styled.input`
 `;
 
 const Search = ({ posts }) => {
-  const [isFocused, setIsFocused] = useState(false);
   const [results, setResults] = useState([]);
 
   return (
@@ -36,12 +36,6 @@ const Search = ({ posts }) => {
       <Input
         placeholder={'Search...'}
         type={'text'}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => {
-          setTimeout(() => {
-            setIsFocused(false);
-          }, 2500);
-        }}
         onChange={e => {
           const query = e.target.value.toLowerCase().trim();
           if (query === '') return setResults([]);
@@ -54,7 +48,7 @@ const Search = ({ posts }) => {
         }}
       />
 
-      {isFocused && results.length > 0 ? (
+      {results.length > 0 ? (
         <StyledResults>
           {results.map(post => {
             return <p key={post.id}>{post.title}</p>;
