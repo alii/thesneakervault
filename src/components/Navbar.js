@@ -8,6 +8,7 @@ export default styled.div`
 
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   background: ${theme.alpha.background(0.5)};
   backdrop-filter: blur(4px);
@@ -15,5 +16,11 @@ export default styled.div`
   h3 {
     cursor: pointer;
     flex: 1;
+
+    flex-basis: 60%;
+
+    &:hover {
+      color: ${theme.palette.red};
+    }
   }
 `;
