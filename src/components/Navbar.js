@@ -5,7 +5,9 @@ export default styled.div`
   padding: 20px 60px;
   position: sticky;
   top: 0;
+
   display: flex;
+  align-items: center;
 
   background: ${theme.alpha.background(0.5)};
   backdrop-filter: blur(4px);

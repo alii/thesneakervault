@@ -61,7 +61,7 @@ const Post = props => {
       <HeaderImage src={post.image} alt={post.title} />
       <Back history={props.history} />
       <h1>{post.title}</h1>
-      <Markdown source={post.content} />
+      <Markdown source={post.content} escapeHtml={false} />
     </StyledPost>
   );
 };
