@@ -10,7 +10,9 @@ const SearchContainer = styled.div`
 const StyledResults = styled.div`
   position: absolute;
   top: 40px;
-  min-width: 15vw;
+  max-width: 80vw;
+  width: 30vw;
+
   right: 0;
   background: white;
   padding: 20px;
@@ -18,7 +20,7 @@ const StyledResults = styled.div`
 
   max-height: 70vh;
   overflow: scroll;
-  border: 1px solid ${theme.muted};
+  //border: 1px solid ${theme.muted};
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 `;
 
