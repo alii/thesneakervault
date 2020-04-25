@@ -1,57 +1,89 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import './App.css';
+import Spinner from './components/Spinner';
+import './assets/App.scss';
 
-function App() {
-  const [date, setDate] = useState(null);
-  useEffect(() => {
-    async function getDate() {
-      const res = await fetch('/api/date');
-      const newDate = await res.text();
-      setDate(newDate);
-    }
-    getDate();
-  }, []);
+import Navbar from './components/Navbar';
+import Store from './util/store';
+import API from './util/API';
+import Hero from './components/Hero';
+import Post, { PostContainer } from './components/PostCard';
+import PostPage from './pages/Post';
+import styled from 'styled-components';
+
+import { Route, BrowserRouter, withRouter } from 'react-router-dom';
+import theme from './assets/theme';
+
+const AllPosts = styled.h2`
+  margin: 15px 0;
+`;
+
+const Home = () => {
+  const store = Store.useStore();
+  const posts = store.get('posts');
+
   return (
-    <main>
-      <h1>Create React App + Go API</h1>
-      <h2>
-        Deployed with{' '}
-        <a
-          href="https://vercel.com/docs"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Vercel
-        </a>
-        !
-      </h2>
-      <p>
-        <a
-          href="https://github.com/zeit/now/tree/master/examples/create-react-app"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          This project
-        </a>{' '}
-        was bootstrapped with{' '}
-        <a href="https://facebook.github.io/create-react-app/">
-          Create React App
-        </a>{' '}
-        and contains three directories, <code>/public</code> for static assets,{' '}
-        <code>/src</code> for components and content, and <code>/api</code>{' '}
-        which contains a serverless <a href="https://golang.org/">Go</a>{' '}
-        function. See{' '}
-        <a href="/api/date">
-          <code>api/date</code> for the Date API with Go
-        </a>
-        .
-      </p>
-      <br />
-      <h2>The date according to Go is:</h2>
-      <p>{date ? date : 'Loading date...'}</p>
-    </main>
+    <>
+      <Hero
+        title={'Sneaker Vault'}
+        paragraph={new Date().getFullYear() + "'s hottest Sneakers, biggest releases & vast archive of shoes."}
+      />
+      <AllPosts>All Posts</AllPosts>
+      <PostContainer>
+        {posts.map(post => {
+          return <Post key={post.id} post={post} />;
+        })}
+      </PostContainer>
+    </>
   );
-}
+};
 
-export default App;
+const Content = styled.div`
+  padding: 0 20px;
+`;
+
+const App = withRouter(props => {
+  const store = Store.useStore();
+  const posts = store.get('posts');
+
+  if (posts.length === 0) {
+    API.exec('/api/posts').then(store.set('posts'));
+
+    return <Spinner />;
+  }
+
+  return (
+    <>
+      <Navbar>
+        <h3 onClick={() => props.history.push('/')}>The Sneaker Vault</h3>
+      </Navbar>
+      <Content>
+        <Route path={'/'} exact component={Home} />
+        <Route path={'/post/:id'} component={PostPage} />
+      </Content>
+    </>
+  );
+});
+
+const Wrapper = () => {
+  console.log(
+    '%c[Megaphone] %cWritten by Alistair Smith (https://aabbccsmith.dev).',
+    `color: ${theme.palette.red}; font-weight: bold; font-size: 150%`,
+    'color: white; font-weight: bold; font-family: sans-serif; font-size: 150%;',
+  );
+
+  console.log(
+    "%c[For Developers] %c We're open source! Check it out at https://github.com/aabbcscmith/sneakervault",
+    `color: ${theme.palette.red}; font-weight: bold; font-size: 110%`,
+    'color: white; font-weight: bold; font-family: sans-serif; font-size: 110%;',
+  );
+
+  return (
+    <BrowserRouter>
+      <Store.Container>
+        <App />
+      </Store.Container>
+    </BrowserRouter>
+  );
+};
+
+export default Wrapper;
