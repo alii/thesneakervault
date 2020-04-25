@@ -77,7 +77,7 @@ const Wrapper = () => {
   );
 
   console.log(
-    "%c[For Developers] %c We're open source! Check it out at https://github.com/aabbcscmith/sneakervault",
+    "%c[For Developers] %c We're open source! Check it out at https://github.com/aabbccsmith/thesneakervault",
     `color: ${theme.palette.red}; font-weight: bold; font-size: 110%`,
     'color: white; font-weight: bold; font-family: sans-serif; font-size: 110%;',
   );
