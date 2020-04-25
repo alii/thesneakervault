@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "md5": "^2.2.1",
     "react": "^16.6.1",
     "react-animated-heart": "^0.0.4",
     "react-dom": "^16.6.1",
