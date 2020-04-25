@@ -26,7 +26,6 @@ const StyledPost = styled.div`
 
     max-height: 140px;
     object-fit: cover;
-    object-position: top;
   }
 
   &:hover {

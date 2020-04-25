@@ -6,7 +6,7 @@ const posts = [
     content:
       "Hi everyone, my name is George – sneakerhead of 4 years and best friends with a programmer who you probably haven't heard of.",
     tags: ['Nike', 'Adidas', 'New', 'Hot'],
-    image: 'https://i.imgur.com/8I0MuVQ.jpg',
+    image: 'https://source.unsplash.com/NoVnXXmDNi0',
     date: Date.now(),
   },
 ].map(post => {

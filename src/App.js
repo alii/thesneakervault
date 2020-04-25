@@ -12,6 +12,7 @@ import styled from 'styled-components';
 
 import { Route, BrowserRouter, withRouter } from 'react-router-dom';
 import theme from './assets/theme';
+import Search from './components/Search';
 
 const AllPosts = styled.h2`
   margin: 15px 0;
@@ -55,6 +56,7 @@ const App = withRouter(props => {
     <>
       <Navbar>
         <h3 onClick={() => props.history.push('/')}>The Sneaker Vault</h3>
+        <Search posts={posts} />
       </Navbar>
       <Content>
         <Route path={'/'} exact component={Home} />
